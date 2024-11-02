@@ -67,11 +67,13 @@ dashboard should include a sales overview, top-performing products, and
 regional breakdowns
 ___________
 # Data Analysis
-### Total Sales by Product
+____
+## Excel
+#### Total Sales by Product
 ![Screenshot (20)](https://github.com/user-attachments/assets/3e64dc73-c39b-46f9-b047-6f674e213438)![Screenshot (27)](https://github.com/user-attachments/assets/1e81cc2c-b7df-4a05-9b61-a5b179bb3c6d)
 Insight: Shoes and Shirts are the top-performing products in terms of revenue, indicating high customer demand or a potentially effective pricing strategy for these items. This insight can help guide inventory management and marketing focus on these best-selling products.
 ______
-### Monthly Total Sales 
+#### Monthly Total Sales 
 ![Screenshot (28)](https://github.com/user-attachments/assets/5a8c56ac-e579-4785-8748-cbf7bacad07d)
 ![Screenshot (29)](https://github.com/user-attachments/assets/a1e1fd68-3c6f-4b32-90a7-2b1e7c653ade)
 Insight: February shows the highest revenue, indicating strong sales during this month, potentially due to seasonal promotions or events. Conversely, September and December have the lowest revenues, suggesting the need for enhanced marketing strategies during these months to boost sales. Analyzing customer behavior and preferences during these periods may help in implementing effective sales tactics.
@@ -81,19 +83,90 @@ ____
 Copy and paste the product to column K, then remove duplicate in order to have our unique product list. Then use the formular (AVERAGEIF($C:$C,K5,$H:$H)) to calculate our average sales for each product. Where “$C:$C” rep our product column, “K5” rep the product we are working with, “,$H:$H” rep our Sales Column.
 ![Average Sales by Product](https://github.com/user-attachments/assets/ee26db8d-a858-4f55-8dda-342e6a53b711)
 ![Screenshot (31)](https://github.com/user-attachments/assets/1faa8c40-f213-4298-bfcd-ac680966dc4f)
-
+_____
 #### Total Revenue by Region.
 Copy and paste the Region to column K, then remove duplicate in order to have our unique Region list. Then use the formular (SUMIF(D:D,K15,H:H)) to calculate our sum of revenue for each region. Where “D:D” rep our Region column, “K15” rep the region we are working with, “,H:H” rep our Revenue Column.
 ![Screenshot (30)](https://github.com/user-attachments/assets/9f5280c2-a87d-40a2-abb0-a741e6a55ef2)
 ![Screenshot (26)](https://github.com/user-attachments/assets/c5f47410-9723-4a39-9bf2-404fe59ee43d)
 Insight: The South region leads in total revenue, suggesting either a larger customer base, higher demand, or possibly more effective sales strategies in this area. Focusing marketing and inventory efforts in the South region could further boost overall sales. Additionally, examining why the West region has the lowest revenue may reveal opportunities for improvement or targeted sales strategies.
+_______
 #### Create any other interesting report
-
+![Screenshot (33)](https://github.com/user-attachments/assets/b82742ba-137a-4cc2-b501-f163be7cf10e)
+![Screenshot (32)](https://github.com/user-attachments/assets/2f39d395-a400-4465-9083-34bfdee5ede3)
 Insight:
 - Regional Performance: The North region shows significant investment in Jackets and Shirts, indicating popularity or potential price increases in these categories. The South region has high unit prices for Shoes, suggesting either higher demand or premium pricing strategies.
 - Opportunities for Growth: Gloves and Hats have lower total unit prices in some regions, indicating potential for targeted promotions or marketing to enhance sales in those areas.
-#### 
-#### 
+  ______
+## SQL
+When loading my dataset I changed the unitsales and quantity column to “int” datatype
+
+#### ADDED A COLUMN NAME SALES
+Alter Table [dbo].[LITA Capstone Dataset SalesData]
+add Sales Bigint
+________
+#### SALES COLUMN WAS CALCULATED
+(Update [dbo].[LITA Capstone Dataset SalesData]
+Set Sales = quantity * unitprice)
+_______
+#### retrieve the total sales for each product category.
+select Product,
+Sum (Sales) as Total_sales
+from [dbo].[LITA Capstone Dataset SalesData]
+group by Product
+Order by Total_sales desc
+![Screenshot (34)](https://github.com/user-attachments/assets/5c657e59-7fa3-450a-881b-be118f21a3c5)
+______
+#### find the number of sales transactions in each region.
+select Region,
+Count (OrderID) as NumberofSalesTransaction
+from [dbo].[LITA Capstone Dataset SalesData]
+group by Region
+
+#### find the highest-selling product by total sales value.
+select top 1 Product,
+sum (sales) AS Total_sales
+from [dbo].[LITA Capstone Dataset SalesData]
+group by product
+order by Total_sales desc
+
+#### calculate total revenue per product.
+select top 1 Product,
+sum (sales) AS Total_sales
+from [dbo].[LITA Capstone Dataset SalesData]
+group by product
+order by Total_sales desc
+
+#### calculate monthly sales totals for the current year.
+select month (OrderDate) as Sales_month,
+sum (Sales) As Total_sales
+from [dbo].[LITA Capstone Dataset SalesData]
+Where year(OrderDate) =year (getdate())
+group by month (OrderDate)
+Order by Sales_month
+
+#### find the top 5 customers by total purchase amount.
+select top 5 Customer_Id,
+sum (Sales) as Total_sales
+from [dbo].[LITA Capstone Dataset SalesData]
+group by Customer_Id
+order by Total_sales desc
+
+#### calculate the percentage of total sales contributed by each region.
+select Region,
+sum (Sales) as Total_sales,
+(sum (sales)*100/
+(select sum (sales) from [dbo].[LITA Capstone Dataset SalesData])) as Sales_percentage
+from [dbo].[LITA Capstone Dataset SalesData]
+group by Region
+order by Sales_percentage DESC
+
+#### identify products with no sales in the last quarter.
+SELECT DISTINCT Product 
+FROM [dbo].[LITA Capstone Dataset SalesData]
+WHERE Product NOT IN 
+(SELECT Product
+FROM [dbo].[LITA Capstone Dataset SalesData]
+WHERE OrderDate >= DATEADD(QUARTER, -1, GETDATE()))
 ####
 ####
 ####
