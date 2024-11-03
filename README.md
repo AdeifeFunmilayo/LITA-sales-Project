@@ -6,6 +6,8 @@ Retail Sales Performance Analysis and Dashboard
 _____
 ## Project Summary
 In this project, the goal is to analyze the sales performance of a retail store, uncovering insights such as top-selling products, regional performance, and monthly sales trends. The objective is to produce an interactive Power BI dashboard that highlights these findings and provides a comprehensive view of sales performance for decision-making.
+![Screenshot (55)](https://github.com/user-attachments/assets/79e1b9ee-2fc8-45e4-ae85-6c4094136dd8)
+
 ___
 ## Project Objectives
 - Perform an initial data exploration in Excel to analyze sales by product, region, and month.
@@ -101,57 +103,89 @@ Insight:
 When loading my dataset I changed the unitsales and quantity column to “int” datatype
 
 #### ADDED A COLUMN NAME SALES
+```SQL
 Alter Table [dbo].[LITA Capstone Dataset SalesData]
-add Sales Bigint
+add Sales int
+```
+![Screenshot (37)](https://github.com/user-attachments/assets/fdb8d1ed-7bde-4131-bbec-d89948d0fb0a)
+
 ________
 #### SALES COLUMN WAS CALCULATED
+```SQL
 (Update [dbo].[LITA Capstone Dataset SalesData]
 Set Sales = quantity * unitprice)
+```
+![Screenshot (38)](https://github.com/user-attachments/assets/39604984-88e4-482c-994d-d9516f1d7e08)
+
 _______
 #### retrieve the total sales for each product category.
+```SQL
 select Product,
-Sum (Sales) as Total_sales
+Count (OrderId) as Total_sales
 from [dbo].[LITA Capstone Dataset SalesData]
 group by Product
 Order by Total_sales desc
-![Screenshot (34)](https://github.com/user-attachments/assets/5c657e59-7fa3-450a-881b-be118f21a3c5)
-______
+```
+![Screenshot (56)](https://github.com/user-attachments/assets/3f5d459f-8c58-42f6-94ea-b759803ee927)
+______![Screenshot (53)](https://github.com/user-attachments/assets/e2c735da-d1d9-4fcf-907d-6348b04257ee)
+-------
 #### find the number of sales transactions in each region.
+```SQL
 select Region,
 Count (OrderID) as NumberofSalesTransaction
 from [dbo].[LITA Capstone Dataset SalesData]
 group by Region
-
+```
+![Screenshot (40)](https://github.com/user-attachments/assets/b2db43d6-e58c-42b9-91c2-622b87b4b954)
+![Screenshot (50)](https://github.com/user-attachments/assets/31e9b64e-0be5-4d20-95c0-006207792b6a)
+-------
 #### find the highest-selling product by total sales value.
+```SQL
 select top 1 Product,
 sum (sales) AS Total_sales
 from [dbo].[LITA Capstone Dataset SalesData]
 group by product
 order by Total_sales desc
+```
+![Screenshot (41)](https://github.com/user-attachments/assets/043dedba-ba36-445e-833c-2673019e56d4)
+![Screenshot (51)](https://github.com/user-attachments/assets/f45145c1-085f-4833-8d8d-16a100100172)
+------
 
 #### calculate total revenue per product.
+```SQL
 select top 1 Product,
 sum (sales) AS Total_sales
 from [dbo].[LITA Capstone Dataset SalesData]
 group by product
 order by Total_sales desc
-
+```
+![Screenshot (43)](https://github.com/user-attachments/assets/a8e31822-eb18-4015-80dc-1df32ae6e26a)
+![Screenshot (49)](https://github.com/user-attachments/assets/59e5bc30-e6a8-46cc-848a-4c2be46e4b9c)
+--------
 #### calculate monthly sales totals for the current year.
+```SQL
 select month (OrderDate) as Sales_month,
 sum (Sales) As Total_sales
 from [dbo].[LITA Capstone Dataset SalesData]
 Where year(OrderDate) =year (getdate())
 group by month (OrderDate)
 Order by Sales_month
-
+```
+![Screenshot (44)](https://github.com/user-attachments/assets/76d7de1a-cff3-4fdd-abc5-dabce3dd3a2e)
+------
 #### find the top 5 customers by total purchase amount.
+```SQL
 select top 5 Customer_Id,
 sum (Sales) as Total_sales
 from [dbo].[LITA Capstone Dataset SalesData]
 group by Customer_Id
 order by Total_sales desc
+```
+![Screenshot (46)](https://github.com/user-attachments/assets/95b75503-1c7e-49a8-a580-fc27198df352)
+-------
 
 #### calculate the percentage of total sales contributed by each region.
+```SQL
 select Region,
 sum (Sales) as Total_sales,
 (sum (sales)*100/
@@ -159,14 +193,21 @@ sum (Sales) as Total_sales,
 from [dbo].[LITA Capstone Dataset SalesData]
 group by Region
 order by Sales_percentage DESC
-
+```
+![Screenshot (47)](https://github.com/user-attachments/assets/1c2ab858-4a0c-4fb0-9416-ff3cadc94712)
+![Screenshot (54)](https://github.com/user-attachments/assets/5df8a24b-3718-4904-879a-9a57c9ce10fe)
+-------
 #### identify products with no sales in the last quarter.
+```SQL
 SELECT DISTINCT Product 
 FROM [dbo].[LITA Capstone Dataset SalesData]
 WHERE Product NOT IN 
 (SELECT Product
 FROM [dbo].[LITA Capstone Dataset SalesData]
 WHERE OrderDate >= DATEADD(QUARTER, -1, GETDATE()))
+```
+![Screenshot (48)](https://github.com/user-attachments/assets/13e9bb14-ed50-460e-8cda-ad1ee4a38cb3)
+
 ####
 ####
 ####
