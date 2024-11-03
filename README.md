@@ -7,27 +7,27 @@ _____
 ## Outline
 [Project Summary](#project-summary)
 
-[Project Objectives](project-objectives)
+[Project Objectives](#project-objectives)
 
-[Data Source](data-source)
+[Data Source](#data-source)
 
-[Dataset](dataset)
+[Dataset](#dataset)
 
-[Tools used](tools-used)
+[Tools used](#tools-used)
 
-[Data Cleaning and Preparation](data-cleaning-and-preparation)
+[Data Cleaning and Preparation](#data-cleaning-and-preparation)
 
-[Instructions](instructions)
+[Instructions](#instructions)
 
-[Data Analysis](data-analysis)
-- [Excel](excel)
-- [SQL](sql)
+[Data Analysis](#data-analysis)
+- [Excel](#excel)
+- [SQL](#sql)
 
-  [Key Findings](key-findings)
+  [Key Findings](#key-findings)
 
-  [Conclusion](conclusion)
+  [Conclusion](#conclusion)
 
-  [Recommendation](recommendation)
+  [Recommendation](#recommendation)
 _______
 ## Project Summary
 In this project, the goal is to analyze the sales performance of a retail store, uncovering insights such as top-selling products, regional performance, and monthly sales trends. The objective is to produce an interactive Power BI dashboard that highlights these findings and provides a comprehensive view of sales performance for decision-making.
