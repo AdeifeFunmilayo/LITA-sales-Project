@@ -83,7 +83,7 @@ ____
 ### Use Excel formulas to calculate metrics
 #### Average Sales per Product 
 Copy and paste the product to column K, then remove duplicate in order to have our unique product list. Then use the formular (AVERAGEIF($C:$C,K5,$H:$H)) to calculate our average sales for each product. Where “$C:$C” rep our product column, “K5” rep the product we are working with, “,$H:$H” rep our Sales Column.
-![Average Sales by Product](https://github.com/user-attachments/assets/ee26db8d-a858-4f55-8dda-342e6a53b711)
+
 ![Screenshot (31)](https://github.com/user-attachments/assets/1faa8c40-f213-4298-bfcd-ac680966dc4f)
 _____
 #### Total Revenue by Region.
@@ -128,7 +128,8 @@ Order by Total_sales desc
 ```
 ![Screenshot (56)](https://github.com/user-attachments/assets/3f5d459f-8c58-42f6-94ea-b759803ee927)
 ______![Screenshot (53)](https://github.com/user-attachments/assets/e2c735da-d1d9-4fcf-907d-6348b04257ee)
--------
+Insight: Hats and Shoes are the top-ordered products, suggesting strong customer demand for these items. Focusing on promotions and inventory for these products could maximize revenue. Conversely, Gloves and Socks have the lowest order counts, indicating potential areas for targeted marketing or bundled sales strategies to boost demand.
+______
 #### find the number of sales transactions in each region.
 ```SQL
 select Region,
