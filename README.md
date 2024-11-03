@@ -4,6 +4,31 @@ _______
 ## Project Title
 Retail Sales Performance Analysis and Dashboard
 _____
+## Outline
+[Project Summary](#project-summary)
+
+[Project Objectives](project-objectives)
+
+[Data Source](data-source)
+
+[Dataset](dataset)
+
+[Tools used](tools-used)
+
+[Data Cleaning and Preparation](data-cleaning-and-preparation)
+
+[Instructions](instructions)
+
+[Data Analysis](data-analysis)
+- [Excel](excel)
+- [SQL](sql)
+
+  [Key Findings](key-findings)
+
+  [Conclusion](conclusion)
+
+  [Recommendation](recommendation)
+_______
 ## Project Summary
 In this project, the goal is to analyze the sales performance of a retail store, uncovering insights such as top-selling products, regional performance, and monthly sales trends. The objective is to produce an interactive Power BI dashboard that highlights these findings and provides a comprehensive view of sales performance for decision-making.
 ![Screenshot (55)](https://github.com/user-attachments/assets/79e1b9ee-2fc8-45e4-ae85-6c4094136dd8)
