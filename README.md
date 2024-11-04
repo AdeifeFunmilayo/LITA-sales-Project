@@ -63,16 +63,16 @@ _______
  ## Data Cleaning and Preparation
  ![Screenshot (17)](https://github.com/user-attachments/assets/e372917c-33a5-4a71-93b3-2d0d99f3024b)
  Before Cleaning
- ________
+ 
 #### Remove Duplicates:
 Highlighted all data (Ctrl + A) and removed duplicates via Data tab > Remove Duplicates option. This step removed 40,079 duplicate values, leaving 9,921 unique records. 
-______
+
 #### Reason:
 Removing duplicates ensures data accuracy by eliminating repeated entries that could skew sales insights and lead to incorrect analysis.
-______
+
 #### Calculate Revenue:
 Added a new column to calculate revenue using the formula Quantity * Unit Price for each order. 
-_____
+
 #### Reason:
 Calculating revenue allows us to analyze total earnings per product, region, and period, which is essential for evaluating sales performance and profitability.
 ![Screenshot (18)](https://github.com/user-attachments/assets/fdc9769b-7759-4378-8a86-380dcad956aa)
